@@ -95,3 +95,64 @@ I then filtered for `PRIVMSG` traffic and identified 43 matching packets directe
 ### IRC Traffic
 
 ![IRC Traffic](screenshots/irc-traffic.png)
+
+## Key Findings
+
+The packet capture contained 2,263 packets, with `192.168.1.2` identified as the primary host based on its involvement in 2,245 packets.
+
+Key observations from the investigation included:
+
+- `192.168.1.2` was involved in the majority of network traffic in the capture.
+- The largest local conversation occurred between `192.168.1.2` and `192.168.1.1`, containing 707 packets and approximately 74 kB of traffic.
+- This local communication consisted primarily of DNS traffic.
+- DNS represented 31.2% of the total packets, with 354 DNS queries identified using a display filter.
+- DNS analysis revealed both A record lookups and PTR reverse-DNS lookups.
+- IRC represented 158 packets, or 7.0% of the capture, but accounted for 26.7% of the captured bytes.
+- IRC traffic included commands and responses such as `PRIVMSG`, `WHO`, `QUIT`, `303`, and `352`.
+- IRC communication was observed between the primary host `192.168.1.2` and `212.204.214.114`.
+
+Based on the traffic analyzed, the capture demonstrates DNS, IRC, and other normal network communication. This analysis focused on understanding network behavior rather than labeling activity as malicious without supporting evidence.
+
+## Skills Demonstrated
+
+- Network traffic analysis with Wireshark
+- Packet capture (PCAP) investigation
+- TCP/IP and UDP traffic analysis
+- DNS analysis
+- IRC protocol analysis
+- Identifying network endpoints and conversations
+- Using Wireshark display filters
+- Analyzing source and destination IP addresses
+- Distinguishing DNS queries from responses
+- Interpreting A and PTR DNS queries
+- Documenting technical findings
+
+## Wireshark Filters Used
+
+`ip.addr == 192.168.1.2`
+
+Used to isolate traffic involving the primary host.
+
+`ip.addr == 192.168.1.1 && ip.addr == 192.168.1.2`
+
+Used to analyze communication between the primary host and the local DNS system.
+
+`dns.flags.response == 0`
+
+Used to isolate DNS queries from DNS responses.
+
+`irc`
+
+Used to isolate IRC traffic.
+
+`irc contains "PRIVMSG"`
+
+Used to investigate IRC PRIVMSG traffic.
+
+## What I Learned
+
+This project helped me understand how Wireshark can be used to investigate a packet capture instead of simply viewing individual packets. I learned how to identify a primary host, examine conversations between devices, filter traffic by protocol, and use source and destination IP addresses to determine the direction of communication.
+
+I also gained a better understanding of DNS traffic, including the difference between A record queries and PTR reverse-DNS queries. Analyzing the IRC traffic showed me how application-layer protocols can be identified and investigated within a packet capture.
+
+Most importantly, I learned that a large amount of traffic or an unfamiliar IP address does not automatically mean that activity is malicious. Network traffic should be investigated and supported by evidence before reaching a conclusion.
