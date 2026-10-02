@@ -47,3 +47,7 @@ Wireshark's Protocol Hierarchy statistics showed that the capture contained both
 | HTTP | 4 | 0.2% |
 
 Although IRC represented only 7.0% of the packets, it accounted for 26.7% of the bytes in the capture.
+
+### Protocol Hierarchy
+
+![Wireshark Protocol Hierarchy](screenshots/protocol-hierarchy.png)
